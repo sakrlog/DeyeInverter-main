@@ -31,7 +31,7 @@ defaultStatus =  {
         "lowVoltage": -1
     }
 }
-
+lastStatus = defaultStatus
 while(True):
     # This will loop every 10 seconds, sending a query to the logger and detecting changes
     timeNow = datetime.datetime.now()
