@@ -9,5 +9,5 @@ Directly read DEYE Inverter (and clones, Sunsynk, Ohm etc.) statistics through t
 ### run_inverter_queries script forever
 
 ```
-./run_inverter_queries.sh 2>&1 & 
+ ./run_inverter_queries.sh > run_inverter_queries.log 2>&1 & 
 ```
