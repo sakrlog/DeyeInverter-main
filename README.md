@@ -101,3 +101,12 @@ Python is not my strongest suite, feel free to suggest, rewrite or add whatever 
 # Home Assistant support
 
 The folder deye_logger contains a Homeassistant add-on. Reference the README.md file in that folder more information.
+
+# run_inverter_queries script forever
+
+```
+ ./run_inverter_queries.sh > run_inverter_queries.log 2>&1 & 
+
+# then you can tail the logs if there are any
+tail -f  run_inverter_queries.log
+```
