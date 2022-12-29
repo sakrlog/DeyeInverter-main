@@ -6,4 +6,8 @@ Solarman Wifi Logger to mqtt for Home Assistant.
 
 Directly read DEYE Inverter (and clones, Sunsynk, Ohm etc.) statistics through the locally accessible Solarman Logger and send the values to a MQTT server.
 
+### run_inverter_queries script forever
 
+```
+./run_inverter_queries.sh 2>&1 & 
+```

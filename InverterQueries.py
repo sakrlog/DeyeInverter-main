@@ -12,6 +12,12 @@ api_key=configParser.get('DeyeInverter', 'queries_bot_api_key')
 bot = telebot.TeleBot(api_key)
 needed = configParser.get('DeyeInverter', 'needed')
 
+def safe_send_message(chat_id, text):
+    try:
+        bot.send_message(chat_id=chat_id, text=text)
+    except Exception as e:
+        print(e)
+        
 def fecthInverter(text):
     realTime = Inverter.now()
     if(text == True):
@@ -41,8 +47,8 @@ def keepReading(message):
             i += 1
             time.sleep(0.5)
     except Exception as e:
-        bot.send_message(chat_id, text="an error occured in autoUpdate")
-        bot.send_message(chat_id, text=e)
+        safe_send_message(chat_id=message.chat.id, text="an error occured in autoUpdate")
+        safe_send_message(chat_id=message.chat.id, text=e)
 
 @bot.message_handler(commands=['now'])
 def oneReading(message):
@@ -50,8 +56,8 @@ def oneReading(message):
         fetched = fecthInverter(True)
         bot.reply_to(message, fetched)
     except Exception as e:
-        bot.send_message(chat_id, text="an error occured in now")
-        bot.send_message(chat_id, text=e)
+        safe_send_message(chat_id=message.chat.id, text="an error occured in now")
+        safe_send_message(chat_id=message.chat.id, text=e)
 
 @bot.message_handler(commands=['all'])
 def AllDetailsNow(message):
@@ -59,7 +65,7 @@ def AllDetailsNow(message):
         fetched = fecthInverter(False)
         bot.reply_to(message, json.dumps(fetched))
     except Exception as e:
-        bot.send_message(chat_id, text="an error occured in AllDetails")
-        bot.send_message(chat_id, text=e)
+        safe_send_message(chat_id=message.chat.id, text="an error occured in AllDetails")
+        safe_send_message(chat_id=message.chat.id, text=e)
 
 bot.polling()
