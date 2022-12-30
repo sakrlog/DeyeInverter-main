@@ -1,11 +1,13 @@
 import os
 import time
+import json
+import math
+import logging
 import datetime
 import traceback
-import logging
 
-import configparser
 import telebot
+import configparser
 import InverterData as Inverter
 
 configParser = configparser.RawConfigParser()
@@ -14,6 +16,7 @@ configParser.read(configFilePath)
 
 logging.basicConfig(encoding='utf-8', level=logging.INFO)
 
+installed_power = int(configParser.get('DeyeInverter', 'installed_power'))
 api_key = configParser.get('DeyeInverter', 'queries_bot_api_key')
 needed = configParser.get('DeyeInverter', 'needed')
 
@@ -21,7 +24,7 @@ bot = telebot.TeleBot(api_key)
 
 def oclock ():
     n = datetime.datetime.now()
-    return n.strftime("%Y-%m-%d %H:%M:%S")
+    return n.strftime('%Y-%m-%d %H:%M:%S')
 
 logging.warning(f'{oclock()} InverterQueries process id: {os.getpid()}')
 
@@ -31,20 +34,23 @@ def safe_send_message(chat_id, text):
     except:
         logging.warning(traceback.format_exc())
 
-def log_message (event, message):
-    logging.info(f'[{oclock()}][/{event}], from_user:{message.from_user.id} ({message.from_user.username})')
+def log_message (message):
+    logging.info(f'[{oclock()}][{message.text}], from_user:{message.from_user.id} ({message.from_user.username})')
 
-def fetch_inverter(pick):
-    realTime = Inverter.now()
-    constructed = ''
-    for item in realTime:
-        if(item in needed or not pick):
-            constructed += item + ":  " + str(realTime[item]) + "\n"
-    return constructed
+def fetch_inverter(pick, format='text'):
+    obj = Inverter.now()
+    if format == 'json':
+        return obj
+    if format == 'text':
+        constructed = ''
+        for item in obj:
+            if(item in needed or not pick):
+                constructed += f'{item}: {str(obj[item])}\n'
+        return constructed
 
 @bot.message_handler(commands=['autoUpdate'])
-def autoUpdate(message):
-    log_message('autoUpdate', message)
+def auto_update(message):
+    log_message(message)
     try:
         fetched = fetch_inverter(True)
         lastMessage = fetched
@@ -61,29 +67,151 @@ def autoUpdate(message):
             time.sleep(0.5)
     except Exception as e:
         logging.warning(traceback.format_exc())
-        safe_send_message(chat_id=message.chat.id, text="an error occured in autoUpdate")
+        safe_send_message(chat_id=message.chat.id, text='an error occured in autoUpdate')
         safe_send_message(chat_id=message.chat.id, text=e)
 
 @bot.message_handler(commands=['now'])
-def oneReading(message):
-    log_message('now', message)
+def one_reading(message):
+    log_message(message)
     try:
         fetched = fetch_inverter(True)
         bot.reply_to(message, fetched)
     except Exception as e:
         logging.warning(traceback.format_exc())
-        safe_send_message(chat_id=message.chat.id, text="an error occured in now")
+        safe_send_message(chat_id=message.chat.id, text='an error occured in now')
         safe_send_message(chat_id=message.chat.id, text=e)
 
 @bot.message_handler(commands=['all'])
-def AllDetailsNow(message):
-    log_message('all', message)
+def all_now(message):
+    log_message(message)
     try:
         fetched = fetch_inverter(False)
         bot.reply_to(message, fetched)
     except Exception as e:
         logging.warning(traceback.format_exc())
-        safe_send_message(chat_id=message.chat.id, text="an error occured in AllDetailsNow")
+        safe_send_message(chat_id=message.chat.id, text='an error occured in all_now')
         safe_send_message(chat_id=message.chat.id, text=e)
 
-bot.polling()
+@bot.message_handler(commands=['json'])
+def all_now_json(message):
+    log_message(message)
+    try:
+        fetched = fetch_inverter(False, format='json')
+        bot.reply_to(message, json.dumps(fetched))
+    except Exception as e:
+        logging.warning(traceback.format_exc())
+        safe_send_message(chat_id=message.chat.id, text='an error occured in all_now_json')
+        safe_send_message(chat_id=message.chat.id, text=e)
+
+def extract_args(arg):
+    return arg.split()[1:]
+    
+# example, we can answer questions, based on calculations
+# maybe even like `dawwer 10` means 'dawwer 10amps' ?
+# maybe even like `dawwer ghessele`
+# maybe even like `dawwer azan` or without dawwer even
+# I am not sure these are correct
+devices = {
+    'ghessele': 10,
+    'neshefe': 10,
+    'jelleye': 10,
+    'deffeye': 10,
+    'azan': 6,
+    'mekweye': 6,
+    'microwave': 7,
+    'seshwar': 7,
+    'trumba': 8,
+    'elevator': 15,
+    'ev': 35,
+}
+
+@bot.message_handler(commands=['dawwer'])
+def dawwer(message):
+    args = extract_args(message.text.replace('_', ' '))
+    amps_or_device = args[0]
+    amps = None
+    watts = 2000
+    try:
+        amps = int(amps_or_device)
+    except:
+        pass
+    if amps:
+        watts = amps * 220
+    elif amps_or_device and devices.get(amps_or_device):
+        amps = devices.get(amps_or_device.strip())
+        watts = amps * 220
+                        
+    log_message(message)
+    try:
+        fetched = fetch_inverter(False, format='json')
+
+        grid_voltage = fetched['Grid Voltage L1(V)'] or 0
+        # grid_connected = fetched['Grid-connected Status()'] or 0
+
+        load_power = fetched['Load L1 Power(W)'] or 0
+
+        # battery_voltage = fetched['Battery Voltage(V)'] or 0
+        battery_percentage = fetched['Battery SOC(%)'] or 0
+
+        # pv1_power = fetched['PV2 Power(W)'] or 0
+        # pv1_power = fetched['PV1 Power(W)'] or 0
+        
+        power_pecentage = math.ceil(load_power / installed_power * 100)
+        requested_power_pecentage = math.ceil((load_power + watts) / installed_power * 100)
+
+        is_grid = grid_voltage > 150
+        
+        power_good = False
+        battery_good = False
+
+        reply = ''
+        if requested_power_pecentage > 90:
+            reply += f'\npower_pecentage CRITICAL!! at: {power_pecentage}%'
+            reply += f'\nrequested_power_pecentage is: {requested_power_pecentage}%!!!'
+        else:
+            power_good = True
+            reply += f'\npower_pecentage at: {power_pecentage}%'
+            reply += f'\nrequested_power_pecentage is: {requested_power_pecentage}%'
+
+        if battery_percentage > 85:
+            battery_good = True
+            reply += f'\nbattery_percentage:  {battery_percentage}%'
+        else:
+            reply += f'\nbattery_percentage is becoming low: {battery_percentage}%'
+
+        if is_grid and power_good:
+            reply += '\n*Yes, dawwer!* fi kahraba (or moteur)'
+        elif battery_good and power_good:
+            reply += '\n*Yes, dawwer!* good battery, *bass 3al reye2*'
+        elif not battery_good:
+            reply += '\n*NO NO*, low battery'
+        elif not power_good:
+            reply += '\n*NO NO*, too much load already'
+
+        bot.reply_to(message, reply)
+    except Exception as e:
+        logging.warning(traceback.format_exc())
+        safe_send_message(chat_id=message.chat.id, text='an error occured in all_now_json')
+        safe_send_message(chat_id=message.chat.id, text=e)
+
+@bot.message_handler(commands=['csgo'])
+def cs_go(message):
+    try:
+        bot.reply_to(message, 'AKID AKID AKID')
+    except:
+        pass
+        
+commands = [
+    telebot.types.BotCommand('/now', 'Short text status'),
+    telebot.types.BotCommand('/dawwer_6', 'Can add 6A?'),
+    telebot.types.BotCommand('/dawwer_10', 'Can add 10A?'),
+] + [
+    telebot.types.BotCommand(f'/dawwer_{k}', f'Can add {k}({devices[k]}A)') for k in devices.keys()
+] + [
+    telebot.types.BotCommand('/csgo', 'Can I play CS?'),
+    telebot.types.BotCommand('/all', 'Long text status'),
+    telebot.types.BotCommand('/json', 'Long json status'),
+]
+
+bot.set_my_commands(commands)        
+bot.infinity_polling()

@@ -119,7 +119,7 @@ supervisorctl tail -f inverter_queries
 # supervisorctl stop inverter_queries
 # supervisorctl start inverter_queries
 
-# to restart supervisord
+# to restart supervisord, or when you change code
 # supervisorctl reload
 
 ```
