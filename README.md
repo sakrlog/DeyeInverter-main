@@ -102,11 +102,24 @@ Python is not my strongest suite, feel free to suggest, rewrite or add whatever 
 
 The folder deye_logger contains a Homeassistant add-on. Reference the README.md file in that folder more information.
 
-# run_inverter_queries script forever
+# run inverter_queries script forever
 
 ```
- ./run_inverter_queries.sh > run_inverter_queries.log 2>&1 & 
+pip install supervisor
 
-# then you can tail the logs if there are any
-tail -f  run_inverter_queries.log
+supervisord -c ./supervisord.conf
+
+# then you can tail the logs
+supervisorctl tail -f inverter_queries
+
+# supervisorctl status
+# supervisorctl stop all
+# supervisorctl restart all
+# supervisorctl restart inverter_queries
+# supervisorctl stop inverter_queries
+# supervisorctl start inverter_queries
+
+# to restart supervisord
+# supervisorctl reload
+
 ```

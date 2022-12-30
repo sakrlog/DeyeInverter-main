@@ -1,0 +1,15 @@
+[DeyeInverter]
+inverter_ip=192.168.X.X
+inverter_port=8899
+inverter_sn=XXXXXXXXXXX
+installed_power=8000
+queries_bot_api_key=
+monitor_bot_api_key=
+telegram_group_chat_id=
+needed=['Total Load Power(W)', 'PV1 Power(W)', 'PV2 Power(W)', 'Battery Power(W)', 'Grid Voltage L1(V)', 'Load Voltage(V)', 'Battery Voltage(V)', 'Battery Temperature(º)', 'Battery SOC(%)', 'Battery Current(A)', 'Daily Energy Bought(kwh)', 'Internal CT L1 Power(W)', 'Grid Status()']
+mqtt=0
+mqtt_server=192.168.X.X
+mqtt_port=1883
+mqtt_topic=XXXXXXXXXXXX
+mqtt_username=
+mqtt_passwd=
