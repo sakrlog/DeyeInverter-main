@@ -105,6 +105,20 @@ def all_now_json(message):
 
 def extract_args(arg):
     return arg.split()[1:]
+
+@bot.message_handler(commands=['adde'])
+def all_now_json(message):
+    log_message(message)
+    try:
+        fetched = fetch_inverter(False, format='json')
+        pv1_power = fetched['PV1 Power(W)'] or 0
+        pv2_power = fetched['PV2 Power(W)'] or 0
+        pv_power = pv1_power + pv2_power
+        bot.reply_to(message, f'{pv_power} watts')
+    except Exception as e:
+        logging.warning(traceback.format_exc())
+        safe_send_message(chat_id=message.chat.id, text='an error occured in all_now_json')
+        safe_send_message(chat_id=message.chat.id, text=e)
     
 # example, we can answer questions, based on calculations
 # maybe even like `dawwer 10` means 'dawwer 10amps' ?
@@ -214,6 +228,7 @@ commands = [
     telebot.types.BotCommand(f'/dawwer_{k}', f'Can add {k}({devices[k]}A)') for k in devices.keys()
 ] + [
     telebot.types.BotCommand('/dawwer', 'Can add x AMPS?'),
+    telebot.types.BotCommand('/adde', 'adde 3am betnazzel halla2?'),
     telebot.types.BotCommand('/csgo', 'Can I play CS?'),
     telebot.types.BotCommand('/all', 'Long text status'),
     telebot.types.BotCommand('/json', 'Long json status'),
