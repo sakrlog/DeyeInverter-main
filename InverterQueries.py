@@ -118,6 +118,7 @@ devices = {
     'deffeye': 10,
     'azan': 6,
     'mekweye': 6,
+    'foren': 10,
     'microwave': 7,
     'seshwar': 7,
     'trumba': 8,
