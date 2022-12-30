@@ -1,4 +1,6 @@
 *.cfg
+*.conf
+*.pid
+*.log
 now.json
-.log
 __pycache__
