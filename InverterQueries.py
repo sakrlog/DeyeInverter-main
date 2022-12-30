@@ -123,12 +123,18 @@ devices = {
     'trumba': 8,
     'elevator': 15,
     'ev': 35,
+    '3': 3,
+    '6': 6,
+    '10': 10,
+    '15': 15,
+    '20': 20,
 }
+devices_commands = [f'dawwer_{k}' for k in devices.keys()]
 
-@bot.message_handler(commands=['dawwer'])
+@bot.message_handler(commands=['dawwer'] + devices_commands)
 def dawwer(message):
     args = extract_args(message.text.replace('_', ' '))
-    amps_or_device = args[0]
+    amps_or_device = args[0] if len(args) else None
     amps = None
     watts = 2000
     try:
@@ -167,17 +173,17 @@ def dawwer(message):
         reply = ''
         if requested_power_pecentage > 90:
             reply += f'\npower_pecentage CRITICAL!! at: {power_pecentage}%'
-            reply += f'\nrequested_power_pecentage is: {requested_power_pecentage}%!!!'
+            reply += f'\nrequested_power is: {requested_power_pecentage}%!!!'
         else:
             power_good = True
-            reply += f'\npower_pecentage at: {power_pecentage}%'
-            reply += f'\nrequested_power_pecentage is: {requested_power_pecentage}%'
+            reply += f'\npower at: {power_pecentage}%'
+            reply += f'\nrequested_power is: {requested_power_pecentage}%'
 
         if battery_percentage > 85:
             battery_good = True
             reply += f'\nbattery_percentage:  {battery_percentage}%'
         else:
-            reply += f'\nbattery_percentage is becoming low: {battery_percentage}%'
+            reply += f'\nbattery_percentage is low: {battery_percentage}%'
 
         if is_grid and power_good:
             reply += '\n*Yes, dawwer!* fi kahraba (or moteur)'
@@ -203,11 +209,10 @@ def cs_go(message):
         
 commands = [
     telebot.types.BotCommand('/now', 'Short text status'),
-    telebot.types.BotCommand('/dawwer_6', 'Can add 6A?'),
-    telebot.types.BotCommand('/dawwer_10', 'Can add 10A?'),
 ] + [
     telebot.types.BotCommand(f'/dawwer_{k}', f'Can add {k}({devices[k]}A)') for k in devices.keys()
 ] + [
+    telebot.types.BotCommand('/dawwer', 'Can add x AMPS?'),
     telebot.types.BotCommand('/csgo', 'Can I play CS?'),
     telebot.types.BotCommand('/all', 'Long text status'),
     telebot.types.BotCommand('/json', 'Long json status'),
