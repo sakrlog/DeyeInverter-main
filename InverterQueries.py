@@ -37,8 +37,22 @@ def safe_send_message(chat_id, text):
 def log_message (message):
     logging.info(f'[{oclock()}][{message.text}], from_user:{message.from_user.id} ({message.from_user.username})')
 
-def fetch_inverter(pick, format='text'):
-    obj = Inverter.now()
+def fetch_inverter(pick, format='text', tries=0):
+    if tries > 0:
+        logging.info(f'fetch_inverter tries={0}')
+
+    try:
+        tries += 1
+        obj = Inverter.now()
+        battery_percentage = obj['Battery SOC(%)'] or 0
+        if battery_percentage == 0 and tries < 5:
+            return fetch_inverter(pick=pick, format=format, tries=tries + 1)
+    except Exception as e:
+        if tries < 5:
+            return fetch_inverter(pick=pick, format=format, tries=tries + 1)
+        else:
+            raise e
+    
     if format == 'json':
         return obj
     if format == 'text':
