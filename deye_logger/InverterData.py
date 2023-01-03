@@ -78,7 +78,7 @@ while chunks<2:
                    break
  
  # SEND DATA
- #print(chunks)
+ print(frame_bytes)
  clientSocket.sendall(frame_bytes);
  
  ok=False;
@@ -89,11 +89,9 @@ while chunks<2:
    try:
     data
    except:
-    print("No data - Die")
-    sys.exit(1) #die, no data
+    print("No data")
   except socket.timeout as msg:
    print("Connection timeout");
-   sys.exit(1) #die
  
  # PARSE RESPONSE (start position 56, end position 60)
  totalpower=0 
