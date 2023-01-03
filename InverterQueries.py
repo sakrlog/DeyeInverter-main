@@ -5,7 +5,6 @@ import math
 import logging
 import datetime
 import traceback
-
 import telebot
 import configparser
 import InverterData as Inverter
@@ -62,7 +61,7 @@ def fetch_inverter(pick, format='text', tries=0):
                 constructed += f'{item}: {str(obj[item])}\n'
         return constructed
 
-@bot.message_handler(commands=['autoUpdate'])
+@bot.message_handler(commands=['autoupdate'])
 def auto_update(message):
     log_message(message)
     try:
@@ -246,6 +245,7 @@ commands = [
     telebot.types.BotCommand('/csgo', 'Can I play CS?'),
     telebot.types.BotCommand('/all', 'Long text status'),
     telebot.types.BotCommand('/json', 'Long json status'),
+    telebot.types.BotCommand('/autoupdate', 'Shows updated data 10 times')
 ]
 
 bot.set_my_commands(commands)        

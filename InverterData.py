@@ -84,8 +84,7 @@ def now():
         try:
           data
         except:
-          print("No data - Die")
-          sys.exit(1) #die, no data
+          print("No data")
       except socket.timeout as msg:
         print("Connection timeout");
         sys.exit(1) #die
