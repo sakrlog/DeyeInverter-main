@@ -9,6 +9,8 @@ import telebot
 import configparser
 import InverterData as Inverter
 
+HOME = os.path.expanduser('~')
+
 configParser = configparser.RawConfigParser()
 configFilePath = r'./config.cfg'
 configParser.read(configFilePath)
@@ -234,7 +236,16 @@ def cs_go(message):
         bot.reply_to(message, 'AKID AKID AKID')
     except:
         pass
-        
+
+@bot.message_handler(commands=['share'])
+def share(message):
+    try:
+        with open(f'{HOME}/shared.txt','r') as file:
+            shared = file.read()
+        bot.reply_to(message, shared)
+    except Exception as e:
+        bot.reply_to(message, f'error reading shared.txt, {e}')
+            
 commands = [
     telebot.types.BotCommand('/now', 'Short text status'),
 ] + [
@@ -245,7 +256,8 @@ commands = [
     telebot.types.BotCommand('/csgo', 'Can I play CS?'),
     telebot.types.BotCommand('/all', 'Long text status'),
     telebot.types.BotCommand('/json', 'Long json status'),
-    telebot.types.BotCommand('/autoupdate', 'Shows updated data 10 times')
+    telebot.types.BotCommand('/autoupdate', 'Shows updated data 10 times'),
+    telebot.types.BotCommand('/share', '~/shared.txt file'),
 ]
 
 bot.set_my_commands(commands)        
