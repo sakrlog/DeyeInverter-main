@@ -1,0 +1,5 @@
+gkeepapi==0.14.2
+libscrc==1.8.1
+paho_mqtt==1.6.1
+pyTelegramBotAPI==4.9.0
+tinytuya==1.9.1

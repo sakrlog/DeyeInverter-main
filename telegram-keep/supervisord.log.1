@@ -1,0 +1,1443 @@
+ERROR:TeleBot:Exception traceback:
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/connection.py", line 72, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socket.py", line 953, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._validate_conn(conn)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 1042, in _validate_conn
+    conn.connect()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connection.py", line 358, in connect
+    self.sock = conn = self._new_conn()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x102a606d0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x102a606d0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 955, in infinity_polling
+    self.polling(non_stop=True, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1073, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 118, in raise_exceptions
+    raise self.exception_info
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 100, in run
+    task(*args, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 649, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 623, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates, long_polling_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 321, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 565, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x102a606d0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))
+
+2023-01-18 04:34:40,889 (__init__.py:960 MainThread) ERROR - TeleBot: "Infinity polling exception: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x102a190d0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))"
+ERROR:TeleBot:Infinity polling exception: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x102a190d0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))
+2023-01-18 04:34:40,891 (__init__.py:962 MainThread) ERROR - TeleBot: "Exception traceback:
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/connection.py", line 72, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socket.py", line 953, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._validate_conn(conn)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 1042, in _validate_conn
+    conn.connect()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connection.py", line 358, in connect
+    self.sock = conn = self._new_conn()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x102a190d0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x102a190d0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 955, in infinity_polling
+    self.polling(non_stop=True, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1073, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 118, in raise_exceptions
+    raise self.exception_info
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 100, in run
+    task(*args, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 649, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 623, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates, long_polling_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 321, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 565, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x102a190d0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))
+"
+ERROR:TeleBot:Exception traceback:
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/connection.py", line 72, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socket.py", line 953, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._validate_conn(conn)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 1042, in _validate_conn
+    conn.connect()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connection.py", line 358, in connect
+    self.sock = conn = self._new_conn()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x102a190d0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x102a190d0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 955, in infinity_polling
+    self.polling(non_stop=True, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1073, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 118, in raise_exceptions
+    raise self.exception_info
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 100, in run
+    task(*args, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 649, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 623, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates, long_polling_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 321, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 565, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x102a190d0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))
+
+2023-01-18 04:34:44,946 (__init__.py:960 MainThread) ERROR - TeleBot: "Infinity polling exception: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)')))"
+ERROR:TeleBot:Infinity polling exception: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)')))
+2023-01-18 04:34:44,948 (__init__.py:962 MainThread) ERROR - TeleBot: "Exception traceback:
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._validate_conn(conn)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 1042, in _validate_conn
+    conn.connect()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connection.py", line 414, in connect
+    self.sock = ssl_wrap_socket(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/ssl_.py", line 449, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/ssl_.py", line 493, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 500, in wrap_socket
+    return self.sslsocket_class._create(
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1040, in _create
+    self.do_handshake()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1309, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 955, in infinity_polling
+    self.polling(non_stop=True, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1073, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 118, in raise_exceptions
+    raise self.exception_info
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 100, in run
+    task(*args, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 649, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 623, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates, long_polling_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 321, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 563, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)')))
+"
+ERROR:TeleBot:Exception traceback:
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._validate_conn(conn)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 1042, in _validate_conn
+    conn.connect()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connection.py", line 414, in connect
+    self.sock = ssl_wrap_socket(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/ssl_.py", line 449, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/ssl_.py", line 493, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 500, in wrap_socket
+    return self.sslsocket_class._create(
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1040, in _create
+    self.do_handshake()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1309, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 955, in infinity_polling
+    self.polling(non_stop=True, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1073, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 118, in raise_exceptions
+    raise self.exception_info
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 100, in run
+    task(*args, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 649, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 623, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates, long_polling_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 321, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 563, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)')))
+
+2023-01-18 04:34:48,053 (__init__.py:960 MainThread) ERROR - TeleBot: "Infinity polling exception: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)')))"
+ERROR:TeleBot:Infinity polling exception: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)')))
+2023-01-18 04:34:48,055 (__init__.py:962 MainThread) ERROR - TeleBot: "Exception traceback:
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._validate_conn(conn)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 1042, in _validate_conn
+    conn.connect()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connection.py", line 414, in connect
+    self.sock = ssl_wrap_socket(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/ssl_.py", line 449, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/ssl_.py", line 493, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 500, in wrap_socket
+    return self.sslsocket_class._create(
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1040, in _create
+    self.do_handshake()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1309, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 955, in infinity_polling
+    self.polling(non_stop=True, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1073, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 118, in raise_exceptions
+    raise self.exception_info
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 100, in run
+    task(*args, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 649, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 623, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates, long_polling_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 321, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 563, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)')))
+"
+ERROR:TeleBot:Exception traceback:
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._validate_conn(conn)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 1042, in _validate_conn
+    conn.connect()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connection.py", line 414, in connect
+    self.sock = ssl_wrap_socket(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/ssl_.py", line 449, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/ssl_.py", line 493, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 500, in wrap_socket
+    return self.sslsocket_class._create(
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1040, in _create
+    self.do_handshake()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1309, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 955, in infinity_polling
+    self.polling(non_stop=True, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1073, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 118, in raise_exceptions
+    raise self.exception_info
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 100, in run
+    task(*args, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 649, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 623, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates, long_polling_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 321, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 563, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)')))
+
+2023-01-18 04:34:51,174 (__init__.py:960 MainThread) ERROR - TeleBot: "Infinity polling exception: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)')))"
+ERROR:TeleBot:Infinity polling exception: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)')))
+2023-01-18 04:34:51,176 (__init__.py:962 MainThread) ERROR - TeleBot: "Exception traceback:
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._validate_conn(conn)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 1042, in _validate_conn
+    conn.connect()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connection.py", line 414, in connect
+    self.sock = ssl_wrap_socket(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/ssl_.py", line 449, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/ssl_.py", line 493, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 500, in wrap_socket
+    return self.sslsocket_class._create(
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1040, in _create
+    self.do_handshake()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1309, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 955, in infinity_polling
+    self.polling(non_stop=True, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1073, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 118, in raise_exceptions
+    raise self.exception_info
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 100, in run
+    task(*args, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 649, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 623, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates, long_polling_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 321, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 563, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)')))
+"
+ERROR:TeleBot:Exception traceback:
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._validate_conn(conn)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 1042, in _validate_conn
+    conn.connect()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connection.py", line 414, in connect
+    self.sock = ssl_wrap_socket(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/ssl_.py", line 449, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/ssl_.py", line 493, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 500, in wrap_socket
+    return self.sslsocket_class._create(
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1040, in _create
+    self.do_handshake()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1309, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 955, in infinity_polling
+    self.polling(non_stop=True, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1073, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 118, in raise_exceptions
+    raise self.exception_info
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 100, in run
+    task(*args, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 649, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 623, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates, long_polling_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 321, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 563, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)')))
+
+2023-01-18 04:34:54,277 (__init__.py:960 MainThread) ERROR - TeleBot: "Infinity polling exception: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)')))"
+ERROR:TeleBot:Infinity polling exception: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)')))
+2023-01-18 04:34:54,279 (__init__.py:962 MainThread) ERROR - TeleBot: "Exception traceback:
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._validate_conn(conn)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 1042, in _validate_conn
+    conn.connect()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connection.py", line 414, in connect
+    self.sock = ssl_wrap_socket(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/ssl_.py", line 449, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/ssl_.py", line 493, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 500, in wrap_socket
+    return self.sslsocket_class._create(
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1040, in _create
+    self.do_handshake()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1309, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 955, in infinity_polling
+    self.polling(non_stop=True, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1073, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 118, in raise_exceptions
+    raise self.exception_info
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 100, in run
+    task(*args, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 649, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 623, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates, long_polling_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 321, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 563, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)')))
+"
+ERROR:TeleBot:Exception traceback:
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._validate_conn(conn)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 1042, in _validate_conn
+    conn.connect()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connection.py", line 414, in connect
+    self.sock = ssl_wrap_socket(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/ssl_.py", line 449, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/ssl_.py", line 493, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 500, in wrap_socket
+    return self.sslsocket_class._create(
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1040, in _create
+    self.do_handshake()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1309, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 955, in infinity_polling
+    self.polling(non_stop=True, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1073, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 118, in raise_exceptions
+    raise self.exception_info
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 100, in run
+    task(*args, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 649, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 623, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates, long_polling_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 321, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 563, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot5152844423:AAHLpd8dl5QMk_qh2Gk2_JTD7lnRtwjGfpg/getUpdates?offset=1&timeout=20 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self signed certificate in certificate chain (_ssl.c:1129)')))
+
+2023-01-18 07:00:21,560 (__init__.py:960 MainThread) ERROR - TeleBot: "Infinity polling exception: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)"
+ERROR:TeleBot:Infinity polling exception: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)
+2023-01-18 07:00:21,562 (__init__.py:962 MainThread) ERROR - TeleBot: "Exception traceback:
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 449, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 444, in _make_request
+    httplib_response = conn.getresponse()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 1349, in getresponse
+    response.begin()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 316, in begin
+    version, status, reason = self._read_status()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 277, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socket.py", line 704, in readinto
+    return self._sock.recv_into(b)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1241, in recv_into
+    return self.read(nbytes, buffer)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1099, in read
+    return self._sslobj.read(len, buffer)
+socket.timeout: The read operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/retry.py", line 550, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/packages/six.py", line 770, in reraise
+    raise value
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 451, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 340, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 955, in infinity_polling
+    self.polling(non_stop=True, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1073, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 118, in raise_exceptions
+    raise self.exception_info
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 100, in run
+    task(*args, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 649, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 623, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates, long_polling_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 321, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 578, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)
+"
+ERROR:TeleBot:Exception traceback:
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 449, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 444, in _make_request
+    httplib_response = conn.getresponse()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 1349, in getresponse
+    response.begin()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 316, in begin
+    version, status, reason = self._read_status()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 277, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socket.py", line 704, in readinto
+    return self._sock.recv_into(b)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1241, in recv_into
+    return self.read(nbytes, buffer)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1099, in read
+    return self._sslobj.read(len, buffer)
+socket.timeout: The read operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/retry.py", line 550, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/packages/six.py", line 770, in reraise
+    raise value
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 451, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 340, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 955, in infinity_polling
+    self.polling(non_stop=True, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1073, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 118, in raise_exceptions
+    raise self.exception_info
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 100, in run
+    task(*args, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 649, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 623, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates, long_polling_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 321, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 578, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)
+
+2023-01-18 07:54:18,370 (__init__.py:960 MainThread) ERROR - TeleBot: "Infinity polling exception: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)"
+ERROR:TeleBot:Infinity polling exception: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)
+2023-01-18 07:54:18,372 (__init__.py:962 MainThread) ERROR - TeleBot: "Exception traceback:
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 449, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 444, in _make_request
+    httplib_response = conn.getresponse()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 1349, in getresponse
+    response.begin()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 316, in begin
+    version, status, reason = self._read_status()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 277, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socket.py", line 704, in readinto
+    return self._sock.recv_into(b)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1241, in recv_into
+    return self.read(nbytes, buffer)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1099, in read
+    return self._sslobj.read(len, buffer)
+socket.timeout: The read operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/retry.py", line 550, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/packages/six.py", line 770, in reraise
+    raise value
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 451, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 340, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 955, in infinity_polling
+    self.polling(non_stop=True, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1073, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 118, in raise_exceptions
+    raise self.exception_info
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 100, in run
+    task(*args, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 649, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 623, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates, long_polling_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 321, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 578, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)
+"
+ERROR:TeleBot:Exception traceback:
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 449, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 444, in _make_request
+    httplib_response = conn.getresponse()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 1349, in getresponse
+    response.begin()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 316, in begin
+    version, status, reason = self._read_status()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 277, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socket.py", line 704, in readinto
+    return self._sock.recv_into(b)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1241, in recv_into
+    return self.read(nbytes, buffer)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1099, in read
+    return self._sslobj.read(len, buffer)
+socket.timeout: The read operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/retry.py", line 550, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/packages/six.py", line 770, in reraise
+    raise value
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 451, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 340, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 955, in infinity_polling
+    self.polling(non_stop=True, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1073, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 118, in raise_exceptions
+    raise self.exception_info
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 100, in run
+    task(*args, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 649, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 623, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates, long_polling_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 321, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 578, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)
+
+2023-01-18 08:54:43,459 (__init__.py:960 MainThread) ERROR - TeleBot: "Infinity polling exception: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)"
+ERROR:TeleBot:Infinity polling exception: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)
+2023-01-18 08:54:43,461 (__init__.py:962 MainThread) ERROR - TeleBot: "Exception traceback:
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 449, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 444, in _make_request
+    httplib_response = conn.getresponse()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 1349, in getresponse
+    response.begin()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 316, in begin
+    version, status, reason = self._read_status()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 277, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socket.py", line 704, in readinto
+    return self._sock.recv_into(b)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1241, in recv_into
+    return self.read(nbytes, buffer)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1099, in read
+    return self._sslobj.read(len, buffer)
+socket.timeout: The read operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/retry.py", line 550, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/packages/six.py", line 770, in reraise
+    raise value
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 451, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 340, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 955, in infinity_polling
+    self.polling(non_stop=True, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1073, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 118, in raise_exceptions
+    raise self.exception_info
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 100, in run
+    task(*args, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 649, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 623, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates, long_polling_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 321, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 578, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)
+"
+ERROR:TeleBot:Exception traceback:
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 449, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 444, in _make_request
+    httplib_response = conn.getresponse()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 1349, in getresponse
+    response.begin()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 316, in begin
+    version, status, reason = self._read_status()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 277, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socket.py", line 704, in readinto
+    return self._sock.recv_into(b)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1241, in recv_into
+    return self.read(nbytes, buffer)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1099, in read
+    return self._sslobj.read(len, buffer)
+socket.timeout: The read operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/retry.py", line 550, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/packages/six.py", line 770, in reraise
+    raise value
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 451, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 340, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 955, in infinity_polling
+    self.polling(non_stop=True, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1073, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 118, in raise_exceptions
+    raise self.exception_info
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 100, in run
+    task(*args, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 649, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 623, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates, long_polling_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 321, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 578, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)
+
+2023-01-18 09:42:51,345 (__init__.py:960 MainThread) ERROR - TeleBot: "Infinity polling exception: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)"
+ERROR:TeleBot:Infinity polling exception: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)
+2023-01-18 09:42:51,347 (__init__.py:962 MainThread) ERROR - TeleBot: "Exception traceback:
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 449, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 444, in _make_request
+    httplib_response = conn.getresponse()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 1349, in getresponse
+    response.begin()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 316, in begin
+    version, status, reason = self._read_status()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 277, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socket.py", line 704, in readinto
+    return self._sock.recv_into(b)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1241, in recv_into
+    return self.read(nbytes, buffer)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1099, in read
+    return self._sslobj.read(len, buffer)
+socket.timeout: The read operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/retry.py", line 550, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/packages/six.py", line 770, in reraise
+    raise value
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 451, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 340, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 955, in infinity_polling
+    self.polling(non_stop=True, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1073, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 118, in raise_exceptions
+    raise self.exception_info
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 100, in run
+    task(*args, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 649, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 623, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates, long_polling_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 321, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 578, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)
+"
+ERROR:TeleBot:Exception traceback:
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 449, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 444, in _make_request
+    httplib_response = conn.getresponse()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 1349, in getresponse
+    response.begin()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 316, in begin
+    version, status, reason = self._read_status()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 277, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socket.py", line 704, in readinto
+    return self._sock.recv_into(b)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1241, in recv_into
+    return self.read(nbytes, buffer)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1099, in read
+    return self._sslobj.read(len, buffer)
+socket.timeout: The read operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/retry.py", line 550, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/packages/six.py", line 770, in reraise
+    raise value
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 451, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 340, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 955, in infinity_polling
+    self.polling(non_stop=True, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1073, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 118, in raise_exceptions
+    raise self.exception_info
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 100, in run
+    task(*args, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 649, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 623, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates, long_polling_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 321, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 578, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)
+
+2023-01-18 09:54:44,124 (__init__.py:960 MainThread) ERROR - TeleBot: "Infinity polling exception: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)"
+ERROR:TeleBot:Infinity polling exception: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)
+2023-01-18 09:54:44,126 (__init__.py:962 MainThread) ERROR - TeleBot: "Exception traceback:
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 449, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 444, in _make_request
+    httplib_response = conn.getresponse()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 1349, in getresponse
+    response.begin()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 316, in begin
+    version, status, reason = self._read_status()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 277, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socket.py", line 704, in readinto
+    return self._sock.recv_into(b)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1241, in recv_into
+    return self.read(nbytes, buffer)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1099, in read
+    return self._sslobj.read(len, buffer)
+socket.timeout: The read operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/retry.py", line 550, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/packages/six.py", line 770, in reraise
+    raise value
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 451, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 340, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 955, in infinity_polling
+    self.polling(non_stop=True, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1073, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 118, in raise_exceptions
+    raise self.exception_info
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 100, in run
+    task(*args, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 649, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 623, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates, long_polling_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 321, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 578, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)
+"
+ERROR:TeleBot:Exception traceback:
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 449, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 444, in _make_request
+    httplib_response = conn.getresponse()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 1349, in getresponse
+    response.begin()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 316, in begin
+    version, status, reason = self._read_status()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 277, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socket.py", line 704, in readinto
+    return self._sock.recv_into(b)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1241, in recv_into
+    return self.read(nbytes, buffer)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py", line 1099, in read
+    return self._sslobj.read(len, buffer)
+socket.timeout: The read operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/util/retry.py", line 550, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/packages/six.py", line 770, in reraise
+    raise value
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 451, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 340, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 955, in infinity_polling
+    self.polling(non_stop=True, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1043, in polling
+    self.__threaded_polling(non_stop=non_stop, interval=interval, timeout=timeout, long_polling_timeout=long_polling_timeout,
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1118, in __threaded_polling
+    raise e
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 1073, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 118, in raise_exceptions
+    raise self.exception_info
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/util.py", line 100, in run
+    task(*args, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 649, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/__init__.py", line 623, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates, long_polling_timeout)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 321, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/telebot/apihelper.py", line 156, in _make_request
+    result = _get_req_session().request(
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/jadsakr/Library/Python/3.9/lib/python/site-packages/requests/adapters.py", line 578, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=25)
+
