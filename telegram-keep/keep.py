@@ -94,8 +94,12 @@ while(True):
         batt_status = 'Charging'
     batteries = [obj['Battery Voltage(V)'], batt_status, obj['Battery Power(W)'],obj['Battery SOC(%)']]
     data = {'pv': pv, 'system': system, 'batteries': batteries}
+<<<<<<< HEAD:telegram-keep/keep.py
     print(data)
     # syncInfo(data)
+=======
+    syncInfo(data)
+>>>>>>> main:keep.py
     if obj['Grid Status()'] > 5 and grid_status == 0:
         # fi kahraba
         manageTuya('turn_on')
