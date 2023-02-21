@@ -75,6 +75,7 @@ def now():
     
     # SEND DATA
     clientSocket.sendall(frame_bytes);
+    # print("here")
     
     ok=False;
     while (not ok):
