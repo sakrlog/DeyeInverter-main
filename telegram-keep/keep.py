@@ -60,6 +60,7 @@ def syncInfo(data={}):
             filled_system = system_blueprint.format(*data['system'])
             
             if merge_all_in_system_notes:
+                snote.text += '\n'
                 snote.text += filled_system
             else:
                 snote.text = filled_system
