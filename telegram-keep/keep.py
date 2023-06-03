@@ -12,19 +12,20 @@ configParser.read(configFilePath)
 
 system_notes_id=configParser.get('DeyeInverter', 'system_notes_id')
 batteries_notes_id=configParser.get('DeyeInverter', 'batteries_notes_id')
-pv_notes_id=configParser.get('DeyeInverter', 'pv_notes_ip')
+pv_notes_id=configParser.get('DeyeInverter', 'pv_notes_id')
 keep_username=configParser.get('DeyeInverter', 'keep_username')
-
-# You can only used the below if you have a token
-keep_token=configParser.get('DeyeInverter', 'keep_token')
 
 keep = gkeepapi.Keep()
 
-# For your first time, uncomment the below
-# fill you credentials, and get your token.
-# success = keep.login(username, 'google_apps_password')
+# # For your first time, uncomment the below
+# # fill you credentials, and get your token.
+# # print it, copy it then add to the config
+# success = keep.login(keep_username, 'replace_me_with_your_google_app_password')
 # token = keep.getMasterToken()
 # print(token)
+
+# You can only used the below if you have a token which you should have added to config
+keep_token=configParser.get('DeyeInverter', 'keep_token')
 
 grid_status = 0
 
@@ -53,6 +54,7 @@ def syncInfo(data={}):
             pv_blueprint = 'PV1: {0} W.       PV2: {1} W.\nTotal: {2} W.'
             filled_pv = pv_blueprint.format(*data['pv'])
             pvnote = keep.get(pv_notes_id)
+            print(pvnote)
             pvnote.text = filled_pv
         if data['batteries']:
             # Batteries
@@ -94,15 +96,10 @@ while(True):
         batt_status = 'Charging'
     batteries = [obj['Battery Voltage(V)'], batt_status, obj['Battery Power(W)'],obj['Battery SOC(%)']]
     data = {'pv': pv, 'system': system, 'batteries': batteries}
-<<<<<<< HEAD:telegram-keep/keep.py
-    print(data)
-    # syncInfo(data)
-=======
     syncInfo(data)
->>>>>>> main:keep.py
     if obj['Grid Status()'] > 5 and grid_status == 0:
         # fi kahraba
-        manageTuya('turn_on')
+        # manageTuya('turn_on')
         grid_status = 1
     elif grid_status == 1 and obj['Grid Status()'] == 0:
         # ken fi kahraba w hala2 rahet
