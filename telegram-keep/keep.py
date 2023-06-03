@@ -11,6 +11,7 @@ configFilePath = r'./config.cfg'
 configParser.read(configFilePath)
 
 system_notes_id=configParser.get('DeyeInverter', 'system_notes_id')
+merge_all_in_system_notes=configParser.get('DeyeInverter', 'merge_all_in_system_notes')
 batteries_notes_id=configParser.get('DeyeInverter', 'batteries_notes_id')
 pv_notes_id=configParser.get('DeyeInverter', 'pv_notes_id')
 keep_username=configParser.get('DeyeInverter', 'keep_username')
@@ -48,35 +49,56 @@ def syncInfo(data={}):
     if data != {}:
         # print(data)
         keep.resume(keep_username,keep_token)
-        
-        if data['pv']:
-            # PV
-            pv_blueprint = 'PV1: {0} W.       PV2: {1} W.\nTotal: {2} W.'
-            filled_pv = pv_blueprint.format(*data['pv'])
-            pvnote = keep.get(pv_notes_id)
-            print(pvnote)
-            pvnote.text = filled_pv
-        if data['batteries']:
-            # Batteries
-            batteries_blueprint = 'Voltage: {0} V.       Status: {1}.\nWatts: {2} W.       SOC: {3} %.'
-            filled_batteries = batteries_blueprint.format(*data['batteries'])
-            bnote = keep.get(batteries_notes_id)
-            bnote.text = filled_batteries
-            if data['batteries'][1] == 'Charging':
-                bnote.color = gkeepapi.node.ColorValue.Green
-            else:
-                bnote.color = gkeepapi.node.ColorValue.Red
+
+        snote = keep.get(system_notes_id)
+        if merge_all_in_system_notes:
+            snote.text = f'Last Synced at {oclock()}\n'
+            
         if data['system']:
             # System
-            system_blueprint = 'Grid status: {0} W.       Loads: {1} W\nTemperature: {2} C.      Gen: {3} W.'
+            system_blueprint = 'GridStatus: {0} W.       Load: {1} W\nTemperature: {2} C.      Gen: {3} W.'
             filled_system = system_blueprint.format(*data['system'])
-            snote = keep.get(system_notes_id)
-            snote.text = filled_system
-            snote.title = 'System ' + data['system'][-1]
-            if data['system'][0] > 5 or data['system'][3] > 5:
-                snote.color = gkeepapi.node.ColorValue.Green
+            
+            if merge_all_in_system_notes:
+                snote.text += filled_system
             else:
-                snote.color = gkeepapi.node.ColorValue.Gray
+                snote.text = filled_system
+                snote.title = 'System ' + data['system'][-1]
+                if data['system'][0] > 5 or data['system'][3] > 5:
+                    snote.color = gkeepapi.node.ColorValue.Green
+                else:
+                    snote.color = gkeepapi.node.ColorValue.Gray
+
+        if data['batteries']:
+            # Batteries
+            batteries_blueprint = 'Batt.Voltage: {0} V.       Batt.Status: {1}.\nBatt. Watts: {2} W.       Batt.SOC: {3} %.'
+            filled_batteries = batteries_blueprint.format(*data['batteries'])
+            
+            ref_note = snote
+            if merge_all_in_system_notes:
+                snote.text += '\n'
+                snote.text += filled_batteries
+            else:
+                bnote = keep.get(batteries_notes_id)
+                bnote.text = filled_batteries
+                ref_note = bnote
+
+            if data['batteries'][1] == 'Charging':
+                ref_note.color = gkeepapi.node.ColorValue.Green
+            else:
+                ref_note.color = gkeepapi.node.ColorValue.Red
+
+        if data['pv']:
+            # PV
+            pv_blueprint = 'PV1: {0} W.       PV2: {1} W.\nPvTotal: {2} W.'
+            filled_pv = pv_blueprint.format(*data['pv'])
+
+            if merge_all_in_system_notes:
+                snote.text += '\n'
+                snote.text += filled_pv
+            else:
+                pvnote = keep.get(pv_notes_id)
+                pvnote.text = filled_pv
 
         print("syncing")
         keep.sync()

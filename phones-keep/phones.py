@@ -105,7 +105,6 @@ def syncInfo(arr=[]):
 
         note = keep.get(notes_id)
         note.text = text
-        note.title = 'Phones Data'
 
         # danger if any line is getting close to 90% of its consumption
         if danger:

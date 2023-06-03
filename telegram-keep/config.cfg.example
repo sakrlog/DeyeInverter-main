@@ -8,6 +8,7 @@ monitor_bot_api_key=
 telegram_group_chat_id=
 needed=['Total Load Power(W)', 'PV1 Power(W)', 'PV2 Power(W)', 'Battery Power(W)', 'Grid Voltage L1(V)', 'Load Voltage(V)', 'Battery Voltage(V)', 'Battery Temperature(º)', 'Battery SOC(%)', 'Battery Current(A)', 'Daily Energy Bought(kwh)', 'Internal CT L1 Power(W)', 'Grid Status()']
 system_notes_id= Create note manually and add its id
+merge_all_in_system_notes=False
 batteries_notes_id= Create note manually and add its id
 pv_notes_id=Create note manually and add its id
 keep_token=read comments in keep.py to set this
