@@ -4,3 +4,6 @@ keep_token=XXXX
 notes_id=XXXXX
 alfa_accounts=[{"number": "03333333", "password": "XXXXXXXXXX"}]
 alfa_labels={"03333333": "John", "03222222": "Jake"}
+timeout=300000
+repeat_minutes=60
+danger_percent=0.8
