@@ -56,7 +56,7 @@ def syncInfo(data={}):
             
         if data['system']:
             # System
-            system_blueprint = 'GridStatus: {0} W.       Load: {1} W\nTemperature: {2} C.      Gen: {3} W.'
+            system_blueprint = 'GridStatus: {0}W      Load: {1}W\nTemp: {2}C      Gen: {3}W'
             filled_system = system_blueprint.format(*data['system'])
             
             if merge_all_in_system_notes:
@@ -72,7 +72,7 @@ def syncInfo(data={}):
 
         if data['batteries']:
             # Batteries
-            batteries_blueprint = 'Batt.Voltage: {0} V.       Batt.Status: {1}.\nBatt. Watts: {2} W.       Batt.SOC: {3} %.'
+            batteries_blueprint = 'Batt.Voltage: {0}V      Batt.Status: {1}\nBatt.Watts: {2}W      Batt.SOC: {3}%'
             filled_batteries = batteries_blueprint.format(*data['batteries'])
             
             ref_note = snote
@@ -91,7 +91,7 @@ def syncInfo(data={}):
 
         if data['pv']:
             # PV
-            pv_blueprint = 'PV1: {0} W.       PV2: {1} W.\nPvTotal: {2} W.'
+            pv_blueprint = 'PV1: {0}W      PV2: {1}W      PVTotal: {2}W'
             filled_pv = pv_blueprint.format(*data['pv'])
 
             if merge_all_in_system_notes:
