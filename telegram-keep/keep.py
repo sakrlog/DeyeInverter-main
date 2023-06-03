@@ -72,7 +72,7 @@ def syncInfo(data={}):
             filled_system = system_blueprint.format(*data['system'])
             snote = keep.get(system_notes_id)
             snote.text = filled_system
-            snote.title = 'System  ' + data['system'][-1]
+            snote.title = 'System ' + data['system'][-1]
             if data['system'][0] > 5 or data['system'][3] > 5:
                 snote.color = gkeepapi.node.ColorValue.Green
             else:

@@ -1,0 +1,7 @@
+*.cfg
+*.conf
+*.pid
+*.log
+node_modules
+.env
+__pycache__

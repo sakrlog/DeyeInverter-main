@@ -1,0 +1,6 @@
+[phones]
+keep_username=XXXX@gmail.com
+keep_token=XXXX
+notes_id=XXXXX
+alfa_accounts=[{"number": "03333333", "password": "XXXXXXXXXX"}]
+alfa_labels={"03333333": "John", "03222222": "Jake"}
