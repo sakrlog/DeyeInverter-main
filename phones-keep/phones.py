@@ -27,9 +27,9 @@ keep = gkeepapi.Keep()
 # You can only used the below if you have a token which you should have added to config
 keep_token=configParser.get('phones', 'keep_token')
 
-TIMEOUT=configParser.get('phones', 'timeout') or 60000 * 5
-REPEAT_MINUTES=configParser.get('phones', 'repeat_minutes') or 60
-DANGER_PERCENT=configParser.get('phones', 'danger_percent') or 0.8
+TIMEOUT=int(configParser.get('phones', 'timeout') or 60000 * 5)
+REPEAT_MINUTES=int(configParser.get('phones', 'repeat_minutes') or 60)
+DANGER_PERCENT=float(configParser.get('phones', 'danger_percent') or 0.8)
 
 def oclock ():
     n = datetime.datetime.now()
