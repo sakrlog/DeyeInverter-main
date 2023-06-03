@@ -1,0 +1,19 @@
+[program:phones_keep]
+command=python3.9 phones.py
+stdout_logfile=./phones_keep.log
+stderr_logfile=./phones_keep.log
+logfile_maxbytes = 100MB
+logfile_backups = 10
+loglevel = info
+environment = PYTHONUNBUFFERED=1
+
+[supervisord]
+
+[inet_http_server]         
+port=127.0.0.1:9002
+
+[supervisorctl]
+serverurl=http://127.0.0.1:9002
+
+[rpcinterface:supervisor]
+supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
