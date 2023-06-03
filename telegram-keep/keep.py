@@ -6,14 +6,14 @@ import datetime
 import tinytuya
 
 
-configParser = configparser.RawConfigParser()
+configParser = configparser.RawConfigParser(allow_no_value=True)
 configFilePath = r'./config.cfg'
 configParser.read(configFilePath)
 
 system_notes_id=configParser.get('DeyeInverter', 'system_notes_id')
 merge_all_in_system_notes=configParser.get('DeyeInverter', 'merge_all_in_system_notes')
-batteries_notes_id=configParser.get('DeyeInverter', 'batteries_notes_id')
-pv_notes_id=configParser.get('DeyeInverter', 'pv_notes_id')
+batteries_notes_id=configParser.get('DeyeInverter', 'batteries_notes_id', fallback=None)
+pv_notes_id=configParser.get('DeyeInverter', 'pv_notes_id', fallback=None)
 keep_username=configParser.get('DeyeInverter', 'keep_username')
 
 keep = gkeepapi.Keep()
